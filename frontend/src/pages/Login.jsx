@@ -9,22 +9,51 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Custominputs from "../components/CustomInputs/Custominputs";
+import useForm from "../hooks/useForm";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
+  const initialState = {
     email: "",
     password: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  // const [formData, setFormData] = useState(initialState);
+
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
+  const { formData, setFormData, handleChange } = useForm(initialState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
     // TODO: Add API call
   };
+
+  const inputFields = [
+    {
+      label: "Email Address",
+      icon: <i className="bi bi-envelope"></i>,
+      type: "email",
+      name: "email",
+      placeholder: "name@example.com",
+      value: formData.email,
+      onChange: handleChange,
+      required: true,
+    },
+    {
+      label: "Password",
+      icon: <i className="bi bi-lock"></i>,
+      type: "password",
+      name: "password",
+      placeholder: "*****",
+      value: formData.password,
+      onChange: handleChange,
+      required: true,
+    },
+  ];
 
   return (
     <Container className="py-5">
@@ -44,53 +73,9 @@ const Login = () => {
                 </p>
               </div>
               <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-4" controlId="email">
-                  <Form.Label className="small text-secondary mb-2">
-                    Email Address
-                  </Form.Label>
-                  <InputGroup className="overflow-hidden rounded-3">
-                    <InputGroup.Text className="border-0">
-                      <i className="bi bi-envelope"></i>
-                    </InputGroup.Text>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      placeholder="name@example.com"
-                      className="py-2 border-0"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </InputGroup>
-                </Form.Group>
-
-                <Form.Group className="mb-4" controlId="password">
-                  <div className="d-flex justify-content-between align-items-center mb-2">
-                    <Form.Label className="small text-secondary mb-0">
-                      Password
-                    </Form.Label>
-                    <Link
-                      to="/forgot-password"
-                      className="small text-decoration-none"
-                    >
-                      Forgot Password?
-                    </Link>
-                  </div>
-                  <InputGroup className="overflow-hidden rounded-3">
-                    <InputGroup.Text className="border-0">
-                      <i className="bi bi-lock"></i>
-                    </InputGroup.Text>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      placeholder="••••••••"
-                      className="py-2 border-0"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                    />
-                  </InputGroup>
-                </Form.Group>
+                {inputFields.map((i) => (
+                  <Custominputs {...i} />
+                ))}
 
                 <Button
                   variant="primary"

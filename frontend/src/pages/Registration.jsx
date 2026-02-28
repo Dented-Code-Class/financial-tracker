@@ -9,24 +9,71 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Custominputs from "../components/CustomInputs/Custominputs";
 
 const Registration = () => {
-  const [formData, setFormData] = useState({
+  const initialState = {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  // const [formData, setFormData] = useState(initialState);
+
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
+  const { formData, setFormData, handleChange } = useForm(initialState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Registration Data:", formData);
     // TODO: Add validation and API call
   };
+
+  const inputFields = [
+    {
+      label: "Username",
+      icon: <i className="bi bi-person"></i>,
+      type: "text",
+      name: "username",
+      placeholder: "John Doe",
+      value: formData.username,
+      onChange: handleChange,
+      required: true,
+    },
+    {
+      label: "Email Address",
+      icon: <i className="bi bi-envelope"></i>,
+      type: "email",
+      name: "email",
+      placeholder: "name@example.com",
+      value: formData.email,
+      onChange: handleChange,
+      required: true,
+    },
+    {
+      label: "Password",
+      icon: <i className="bi bi-lock"></i>,
+      type: "password",
+      name: "password",
+      placeholder: "*****",
+      value: formData.password,
+      onChange: handleChange,
+      required: true,
+    },
+    {
+      label: "Confirm Password",
+      icon: <i className="bi bi-shield-lock"></i>,
+      type: "password",
+      name: "confirmPassword",
+      placeholder: "*****",
+      value: formData.confirmPassword,
+      onChange: handleChange,
+      required: true,
+    },
+  ];
 
   return (
     <Container className="py-5">
@@ -35,81 +82,20 @@ const Registration = () => {
           <Card className="glass-card border-0 hover-shadow rounded-4">
             <Card.Body className="p-5">
               <div className="text-center mb-4">
-                <h2 className="fw-bold fs-1 mb-2" style={{ color: "var(--accent-primary)" }}>Join Us</h2>
-                <p className="text-secondary">Create your account to start tracking</p>
+                <h2
+                  className="fw-bold fs-1 mb-2"
+                  style={{ color: "var(--accent-primary)" }}
+                >
+                  Join Us
+                </h2>
+                <p className="text-secondary">
+                  Create your account to start tracking
+                </p>
               </div>
               <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="username">
-                  <Form.Label className="small text-secondary mb-2">Username</Form.Label>
-                  <InputGroup className="overflow-hidden rounded-3">
-                    <InputGroup.Text className="border-0">
-                      <i className="bi bi-person"></i>
-                    </InputGroup.Text>
-                    <Form.Control
-                      type="text"
-                      name="username"
-                      placeholder="johndoe"
-                      className="py-2 border-0"
-                      value={formData.username}
-                      onChange={handleChange}
-                      required
-                    />
-                  </InputGroup>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="email">
-                  <Form.Label className="small text-secondary mb-2">Email Address</Form.Label>
-                  <InputGroup className="overflow-hidden rounded-3">
-                    <InputGroup.Text className="border-0">
-                      <i className="bi bi-envelope"></i>
-                    </InputGroup.Text>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      placeholder="name@example.com"
-                      className="py-2 border-0"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </InputGroup>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="password">
-                  <Form.Label className="small text-secondary mb-2">Password</Form.Label>
-                  <InputGroup className="overflow-hidden rounded-3">
-                    <InputGroup.Text className="border-0">
-                      <i className="bi bi-lock"></i>
-                    </InputGroup.Text>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      placeholder="••••••••"
-                      className="py-2 border-0"
-                      value={formData.password}
-                      onChange={handleChange}
-                      required
-                    />
-                  </InputGroup>
-                </Form.Group>
-
-                <Form.Group className="mb-4" controlId="confirmPassword">
-                  <Form.Label className="small text-secondary mb-2">Confirm Password</Form.Label>
-                  <InputGroup className="overflow-hidden rounded-3">
-                    <InputGroup.Text className="border-0">
-                      <i className="bi bi-shield-lock"></i>
-                    </InputGroup.Text>
-                    <Form.Control
-                      type="password"
-                      name="confirmPassword"
-                      placeholder="••••••••"
-                      className="py-2 border-0"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      required
-                    />
-                  </InputGroup>
-                </Form.Group>
+                {inputFields.map((i) => (
+                  <Custominputs {...i} />
+                ))}
 
                 <Button
                   variant="primary"
@@ -135,6 +121,5 @@ const Registration = () => {
     </Container>
   );
 };
-
 
 export default Registration;

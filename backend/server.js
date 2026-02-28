@@ -2,6 +2,7 @@ import express from "express";
 import mongoose, { mongo } from "mongoose";
 import { configDotenv } from "dotenv";
 import cors from "cors";
+import { createUser } from "./src/Controller/userController.js";
 configDotenv();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,6 +11,9 @@ const MONGO_URL =
 
 app.use(express.json());
 app.use(cors());
+
+//User Register
+app.post("/api/v1/auth/register", createUser);
 
 mongoose
   .connect(MONGO_URL) // MONGOURL --> Connection string

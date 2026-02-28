@@ -1,0 +1,11 @@
+@apiUrl = http://localhost:3000/api/v1
+@userURL = {{apiUrl}}/auth/register
+
+POST {{userURL}}
+Content-Type: application/json
+
+{
+    "username":"manish",
+    "email": "manish123@gmail.com",
+    "password": "123456"
+}

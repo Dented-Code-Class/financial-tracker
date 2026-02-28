@@ -1,42 +1,86 @@
+/* Main App styles */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.min-vh-75 {
+  min-height: 75vh;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Glass Card Effect */
+.glass-card {
+  background: var(--bg-secondary) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(100, 255, 218, 0.1) !important;
+  color: var(--text-primary) !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Custom hover effects */
+.hover-shadow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card {
-  padding: 2em;
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+  border-color: var(--accent-primary) !important;
 }
 
-.read-the-docs {
-  color: #888;
+/* Navbar active state */
+.nav-link {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent-primary) !important;
+}
+
+/* Button enhancements */
+.btn-primary {
+  background-color: transparent !important;
+  border-color: var(--accent-primary) !important;
+  color: var(--accent-primary) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: rgba(100, 255, 218, 0.1) !important;
+  box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+}
+
+/* Input enhancements */
+.form-control,
+.input-group-text {
+  background-color: var(--bg-tertiary) !important;
+  border: 1px solid var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.form-control:focus {
+  border-color: var(--accent-primary) !important;
+  box-shadow: none !important;
+  background-color: var(--bg-secondary) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* Custom colors for transaction badges and text */
+.text-success {
+  color: var(--accent-primary) !important;
+}
+
+.text-danger {
+  color: #ff4d4d !important;
+}
+
+.bg-light-hover:hover {
+  background-color: var(--bg-tertiary) !important;
 }

@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Custominputs from "../components/CustomInputs/Custominputs";
+import useForm from "../hooks/useForm";
 
 const Registration = () => {
   const initialState = {

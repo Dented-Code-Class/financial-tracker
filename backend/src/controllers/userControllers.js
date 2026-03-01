@@ -13,7 +13,7 @@ export const createUser = async (req, res) => {
 
     let data = await User.insertOne(newUser);
     return res.send({
-      status: "Success",
+      status: "success",
       messgae: "user created successfully",
       user: data,
     });

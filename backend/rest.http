@@ -1,11 +1,45 @@
 @apiUrl = http://localhost:3000/api/v1
 @userURL = {{apiUrl}}/auth/register
 
+@transactionURl = {{apiUrl}}/transactions
+
 POST {{userURL}}
 Content-Type: application/json
 
 {
     "username":"manish",
-    "email": "manish123@gmail.com",
+    "email": "test123@gmail.com",
     "password": "123456"
+}
+###
+POST {{transactionURl}}
+Content-Type: application/json
+
+{
+    "type":"expense",
+    "amount": "100",
+    "tDate":"2026-02-25",
+   "description": "fuel"
+}
+###
+GET {{transactionURl}}
+
+###
+PATCH {{transactionURl}}/69a37ecb5be4a61999a7a228
+Content-Type: application/json
+
+{
+    "type":"expense",
+    "amount":"100"
+}
+
+###
+DELETE {{transactionURl}}/69a37ecb5be4a61999a7a228
+
+###
+DELETE {{transactionURl}}
+Content-Type: application/json
+
+{
+    "ids": ["69a3818592a4d161ac55ea23","69a3818492a4d161ac55ea21","69a3818492a4d161ac55ea1f"]
 }

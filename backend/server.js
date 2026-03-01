@@ -2,7 +2,7 @@ import express from "express";
 import mongoose, { mongo } from "mongoose";
 import { configDotenv } from "dotenv";
 import cors from "cors";
-import { createUser } from "./src/controllers/userControllers.js";
+import { createUser, loginUser } from "./src/controllers/userControllers.js";
 import {
   createTransaction,
   deleteTransaction,
@@ -10,6 +10,8 @@ import {
   getTransaction,
   updateTransaction,
 } from "./src/controllers/transactionControllers.js";
+import { auth } from "./src/middlewares/authMiddleware.js";
+
 configDotenv();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,20 +24,23 @@ app.use(cors());
 //User Register
 app.post("/api/v1/auth/register", createUser);
 
+// login api
+app.post("/api/v1/auth/login", loginUser);
+
 //Create Transaction
-app.post("/api/v1/transactions", createTransaction);
+app.post("/api/v1/transactions", auth, createTransaction);
 
 //Get Transaction
-app.get("/api/v1/transactions", getTransaction);
+app.get("/api/v1/transactions", auth, getTransaction);
 
 //Update Transaction
-app.patch("/api/v1/transactions/:id", updateTransaction);
+app.patch("/api/v1/transactions/:id", auth, updateTransaction);
 
 //Delete Transaction by ID
-app.delete("/api/v1/transactions/:id", deleteTransaction);
+app.delete("/api/v1/transactions/:id", auth, deleteTransaction);
 
 //Delete Transaction by IDs
-app.delete("/api/v1/transactions", deleteTransactions);
+app.delete("/api/v1/transactions", auth, deleteTransactions);
 
 mongoose
   .connect(MONGO_URL) // MONGOURL --> Connection string

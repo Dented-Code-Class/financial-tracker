@@ -1,9 +1,9 @@
 @apiUrl = http://localhost:3000/api/v1
-@userURL = {{apiUrl}}/auth/register
+@userURL = {{apiUrl}}/auth
 
 @transactionURl = {{apiUrl}}/transactions
 
-POST {{userURL}}
+POST {{userURL}}/register
 Content-Type: application/json
 
 {
@@ -11,8 +11,20 @@ Content-Type: application/json
     "email": "test123@gmail.com",
     "password": "123456"
 }
+
+### login request
+POST {{userURL}}/login
+Content-Type: application/json
+
+{
+    "email" : "test123@gmail.com",
+    "password" : "123456"
+}
+
+
 ###
 POST {{transactionURl}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
 Content-Type: application/json
 
 {
@@ -23,9 +35,11 @@ Content-Type: application/json
 }
 ###
 GET {{transactionURl}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
 
 ###
 PATCH {{transactionURl}}/69a37ecb5be4a61999a7a228
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
 Content-Type: application/json
 
 {
@@ -35,9 +49,11 @@ Content-Type: application/json
 
 ###
 DELETE {{transactionURl}}/69a37ecb5be4a61999a7a228
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
 
 ###
 DELETE {{transactionURl}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
 Content-Type: application/json
 
 {

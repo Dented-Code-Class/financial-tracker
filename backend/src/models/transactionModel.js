@@ -16,6 +16,10 @@ let transactionSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+  },
 });
 
 //User Model

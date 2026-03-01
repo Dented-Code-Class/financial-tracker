@@ -38,7 +38,7 @@ GET {{transactionURl}}
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
 
 ###
-PATCH {{transactionURl}}/69a37ecb5be4a61999a7a228
+PATCH {{transactionURl}}/69a38331763a7f3ae7a7127c
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
 Content-Type: application/json
 
@@ -57,5 +57,5 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21h
 Content-Type: application/json
 
 {
-    "ids": ["69a3818592a4d161ac55ea23","69a3818492a4d161ac55ea21","69a3818492a4d161ac55ea1f"]
+    "ids": ["69a39134068667756326dc1e","69a3818492a4d161ac55ea21","69a3818492a4d161ac55ea1f"]
 }

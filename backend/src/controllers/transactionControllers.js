@@ -2,7 +2,11 @@ import { Transaction } from "../models/transactionModel.js";
 
 export const createTransaction = async (req, res) => {
   try {
+    console.log(req.user);
     const newTransaction = req.body;
+    // add user id from req.
+    newTransaction.userId = req.user._id;
+
     const data = await Transaction.insertOne(newTransaction);
     return res.send({
       status: "success",
@@ -20,7 +24,7 @@ export const createTransaction = async (req, res) => {
 
 export const getTransaction = async (req, res) => {
   try {
-    const transactions = await Transaction.find();
+    const transactions = await Transaction.find({ userId: req.user._id });
     return res.send({
       status: "success",
       message: "Transaction found",
@@ -39,8 +43,11 @@ export const updateTransaction = async (req, res) => {
   try {
     const transactionId = req.params.id;
     const updatedPayload = req.body;
-    const transaction = await Transaction.findByIdAndUpdate(
-      transactionId,
+    const transaction = await Transaction.findOneAndUpdate(
+      {
+        _id: transactionId,
+        userId: req.user._id,
+      },
       updatedPayload,
       {
         new: true,
@@ -63,7 +70,10 @@ export const updateTransaction = async (req, res) => {
 export const deleteTransaction = async (req, res) => {
   try {
     const trasactionId = req.params.id;
-    const data = await Transaction.deleteOne({ _id: trasactionId });
+    const data = await Transaction.deleteOne({
+      _id: trasactionId,
+      userId: req.user._id,
+    });
     return res.send({
       status: "success",
       message: "Delete transaction successful",
@@ -81,7 +91,10 @@ export const deleteTransaction = async (req, res) => {
 export const deleteTransactions = async (req, res) => {
   try {
     const transactionIds = req.body.ids;
-    let data = await Transaction.deleteMany({ _id: { $in: transactionIds } });
+    let data = await Transaction.deleteMany({
+      _id: { $in: transactionIds },
+      userId: req.user._id,
+    });
     return res.send({
       status: "success",
       message: "selected transaction deleted",

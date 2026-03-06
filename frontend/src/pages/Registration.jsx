@@ -1,36 +1,59 @@
-import React, { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Card,
-  InputGroup,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import Custominputs from "../components/CustomInputs/Custominputs";
 import useForm from "../hooks/useForm";
 
 const Registration = () => {
+  const navigate = useNavigate();
   const initialState = {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
-  // const [formData, setFormData] = useState(initialState);
-
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
 
   const { formData, setFormData, handleChange } = useForm(initialState);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Registration Data:", formData);
-    // TODO: Add validation and API call
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/v1/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+          }),
+        },
+      );
+
+      const data = await response.json();
+
+      console.log("Response Data:", data);
+
+      if (response.ok) {
+        alert("Registration successful");
+        setFormData(initialState);
+        navigate("/login");
+      } else {
+        alert(data.message || "Registration failed");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
   };
 
   const inputFields = [
@@ -93,9 +116,10 @@ const Registration = () => {
                   Create your account to start tracking
                 </p>
               </div>
+
               <Form onSubmit={handleSubmit}>
-                {inputFields.map((i) => (
-                  <Custominputs {...i} />
+                {inputFields.map((i, index) => (
+                  <Custominputs key={index} {...i} />
                 ))}
 
                 <Button

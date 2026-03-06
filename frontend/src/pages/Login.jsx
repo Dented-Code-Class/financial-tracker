@@ -8,11 +8,12 @@ import {
   Card,
   InputGroup,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Custominputs from "../components/CustomInputs/Custominputs";
 import useForm from "../hooks/useForm";
 
 const Login = () => {
+  const navigate = useNavigate();
   const initialState = {
     email: "",
     password: "",

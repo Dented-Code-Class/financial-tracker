@@ -4,13 +4,9 @@ export const createTransaction = async (req, res) => {
   try {
     console.log(req.user);
     const newTransaction = req.body;
-<<<<<<< HEAD
-    newTransaction.userId = req.user._id;
-=======
     // add user id from req.
     newTransaction.userId = req.user._id;
 
->>>>>>> main
     const data = await Transaction.insertOne(newTransaction);
     return res.send({
       status: "success",
@@ -28,10 +24,6 @@ export const createTransaction = async (req, res) => {
 
 export const getTransaction = async (req, res) => {
   try {
-<<<<<<< HEAD
-    //find only the transaction of current looged in user
-=======
->>>>>>> main
     const transactions = await Transaction.find({ userId: req.user._id });
     return res.send({
       status: "success",

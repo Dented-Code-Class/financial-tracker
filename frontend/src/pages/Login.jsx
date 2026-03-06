@@ -87,7 +87,7 @@ const Login = () => {
 
                 <div className="text-center">
                   <p className="text-secondary small mb-0">
-                    New to Finance Tracker?{" "}
+                    New to Finance Tracker?
                     <Link to="/register" className="fw-bold">
                       Create an account
                     </Link>

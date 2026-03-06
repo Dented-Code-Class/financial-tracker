@@ -16,7 +16,6 @@ export const auth = async (req, res, next) => {
       if (user) {
         user.password = "";
         req.user = user;
-
         next();
       } else {
         return res.send({

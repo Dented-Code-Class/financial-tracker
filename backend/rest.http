@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 POST {{transactionURl}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI3NTA2LCJleHAiOjE3NzIzMjc1NjZ9.mYTLLyOyhtk2FiJtGESRoZqiGdosHieSewRpFhqFC8g
 Content-Type: application/json
 
 {
@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 ###
 GET {{transactionURl}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI3NTA2LCJleHAiOjE3NzIzMjc1NjZ9.mYTLLyOyhtk2FiJtGESRoZqiGdosHieSewRpFhqFC8g
 
 ###
 PATCH {{transactionURl}}/69a38331763a7f3ae7a7127c

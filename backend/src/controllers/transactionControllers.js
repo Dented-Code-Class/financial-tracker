@@ -10,8 +10,8 @@ export const createTransaction = async (req, res) => {
     const data = await Transaction.insertOne(newTransaction);
     return res.send({
       status: "success",
-      messgae: "Transaction added succesfully",
-      Transaction: data,
+      message: "Transaction added successfully",
+      transaction: data,
     });
   } catch (error) {
     console.log(error);

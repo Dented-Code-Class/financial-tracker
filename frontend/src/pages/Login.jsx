@@ -27,10 +27,35 @@ const Login = () => {
 
   const { formData, setFormData, handleChange } = useForm(initialState);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
     // TODO: Add API call
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert("Login successful");
+        setFormData(initialState);
+        // store token at the local storage
+        const token = data.token;
+        localStorage.setItem("token", token);
+
+        navigate("/dashboard");
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
   };
 
   const inputFields = [

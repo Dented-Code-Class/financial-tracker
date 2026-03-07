@@ -105,8 +105,6 @@ const Transactions = () => {
       );
       const data = await response.json();
       if (response.ok) {
-        alert("fetch successfull");
-
         setTransactions(data.transactions);
         console.log(103, data);
       }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -22,32 +22,56 @@ const Transactions = () => {
   // Modal Handlers
   const handleOpenModal = () => setShowAddModal(true);
   const handleCloseModal = () => setShowAddModal(false);
+  // Fetch all transactions
 
   // Add new transaction
-  const handleAddTransaction = (newTx) => {
-    // Basic sort by date descending when adding
-    const updated = [newTx, ...transactions].sort(
-      (a, b) => new Date(b.date) - new Date(a.date),
-    );
-    setTransactions(updated);
+  const handleAddTransaction = async (newTx) => {
     // TODO: call add transaction api
     // POST http://localhost:3000/api/v1/transactions
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "http://localhost:3000/api/v1/transactions",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            authorization: token,
+          },
+          body: JSON.stringify(newTx),
+        },
+      );
+      const data = await response.json();
+      console.log("Add Transaction Response:", data);
+      if (data.status == "success") {
+        const addedTransaction = data.transaction;
+        const updated = [addedTransaction, ...transactions].sort(
+          (a, b) => new Date(b.date) - new Date(a.date),
+        );
+
+        setTransactions(updated);
+        handleCloseModal();
+      }
+    } catch (error) {
+      console.log("Error adding transaction:", error);
+    }
   };
 
   // Checkbox Handlers
   const handleSelectAll = (e) => {
     if (e.target.checked) {
-      setSelectedIds(transactions.map((t) => t.id));
+      setSelectedIds(transactions.map((t) => t._id));
     } else {
       setSelectedIds([]);
     }
   };
 
-  const handleSelectOne = (e, id) => {
+  const handleSelectOne = (e, _id) => {
     if (e.target.checked) {
-      setSelectedIds((prev) => [...prev, id]);
+      setSelectedIds((prev) => [...prev, _id]);
     } else {
-      setSelectedIds((prev) => prev.filter((selectedId) => selectedId !== id));
+      setSelectedIds((prev) => prev.filter((selectedId) => selectedId !== _id));
     }
   };
 
@@ -60,14 +84,11 @@ const Transactions = () => {
       )
     ) {
       setTransactions((prev) =>
-        prev.filter((t) => !selectedIds.includes(t.id)),
+        prev.filter((t) => !selectedIds.includes(t._id)),
       );
       setSelectedIds([]); // clear selection
     }
   };
-
-  //   TODO: call api to fetch transactionf from backend api
-  // http://localhost:3000/api/v1/transactions
 
   return (
     <Container className="py-5">
@@ -181,7 +202,7 @@ const Transactions = () => {
                     {transactions.length > 0 ? (
                       transactions.map((tx) => (
                         <tr
-                          key={tx.id}
+                          key={tx._id}
                           style={{
                             borderBottom: "1px solid rgba(255,255,255,0.05)",
                           }}
@@ -189,8 +210,8 @@ const Transactions = () => {
                           <td className="py-3 px-4">
                             <Form.Check
                               type="checkbox"
-                              checked={selectedIds.includes(tx.id)}
-                              onChange={(e) => handleSelectOne(e, tx.id)}
+                              checked={selectedIds.includes(tx._id)}
+                              onChange={(e) => handleSelectOne(e, tx._id)}
                             />
                           </td>
                           <td className="py-3">{tx.date}</td>

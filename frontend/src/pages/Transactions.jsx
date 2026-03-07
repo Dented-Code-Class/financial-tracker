@@ -117,9 +117,7 @@ const Transactions = () => {
   };
 
   useEffect(() => {
-    return () => {
-      fetchtransactions();
-    };
+    fetchtransactions();
   }, []);
 
   return (

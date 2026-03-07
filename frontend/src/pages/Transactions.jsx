@@ -74,17 +74,40 @@ const Transactions = () => {
   };
 
   // Delete Selected
-  const handleDeleteSelected = () => {
+  const handleDeleteSelected = async () => {
     if (selectedIds.length === 0) return;
     if (
       window.confirm(
         `Are you sure you want to delete ${selectedIds.length} transaction(s)?`,
       )
     ) {
-      setTransactions((prev) =>
-        prev.filter((t) => !selectedIds.includes(t._id)),
+      //   CALL DELET API
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "http://localhost:3000/api/v1/transactions",
+        {
+          method: "DELETE",
+          headers: {
+            authorization: token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ids: selectedIds,
+          }),
+        },
       );
-      setSelectedIds([]); // clear selection
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message);
+        setTransactions((prev) =>
+          prev.filter((t) => !selectedIds.includes(t._id)),
+        );
+        setSelectedIds([]); // clear selection
+      } else {
+        alert("DELETE FAILED");
+      }
     }
   };
 
@@ -105,8 +128,6 @@ const Transactions = () => {
       );
       const data = await response.json();
       if (response.ok) {
-        alert("fetch successfull");
-
         setTransactions(data.transactions);
         console.log(103, data);
       }

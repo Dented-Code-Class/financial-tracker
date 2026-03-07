@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 
@@ -42,6 +42,16 @@ const Header = () => {
                 <Nav.Link as={NavLink} to="/transactions" className="mx-2">
                   Transactions
                 </Nav.Link>
+                <Button
+                  onClick={() => {
+                    //1. remove user from user context
+                    setUser({});
+                    //2. remove token from local storage
+                    localStorage.removeItem("token");
+                  }}
+                >
+                  Logout
+                </Button>
               </>
             ) : (
               <>

@@ -8,7 +8,7 @@ import {
   Card,
   InputGroup,
 } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Custominputs from "../components/CustomInputs/Custominputs";
 import useForm from "../hooks/useForm";
 import { useUser } from "../context/UserContext";
@@ -16,7 +16,9 @@ import { useUser } from "../context/UserContext";
 const Login = () => {
   const { fetchUserDetail } = useUser();
 
+  const location = useLocation();
   const navigate = useNavigate();
+
   const initialState = {
     email: "",
     password: "",
@@ -54,8 +56,10 @@ const Login = () => {
         // fetch user detail
         fetchUserDetail();
 
-        // navigate("/dashboard");
-        navigate("/dashboard");
+        console.log(location);
+        if (location.pathname.includes("login")) {
+          navigate("/dashboard");
+        }
       } else {
         alert(data.message || "Login failed");
       }

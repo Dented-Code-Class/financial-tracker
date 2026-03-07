@@ -45,7 +45,7 @@ const Transactions = () => {
       const data = await response.json();
       console.log("Add Transaction Response:", data);
       if (data.status == "success") {
-        const addedTransaction = data.data;
+        const addedTransaction = data.transaction;
         const updated = [addedTransaction, ...transactions].sort(
           (a, b) => new Date(b.date) - new Date(a.date),
         );

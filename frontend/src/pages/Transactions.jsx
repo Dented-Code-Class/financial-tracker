@@ -46,9 +46,7 @@ const Transactions = () => {
       console.log("Add Transaction Response:", data);
       if (data.status == "success") {
         const addedTransaction = data.transaction;
-        const updated = [addedTransaction, ...transactions].sort(
-          (a, b) => new Date(b.date) - new Date(a.date),
-        );
+        const updated = [...transactions, addedTransaction];
 
         setTransactions(updated);
         handleCloseModal();
@@ -80,7 +78,7 @@ const Transactions = () => {
     if (selectedIds.length === 0) return;
     if (
       window.confirm(
-        `Are you sure you want to delete ${selectedIds.length} transaction(s)?`
+        `Are you sure you want to delete ${selectedIds.length} transaction(s)?`,
       )
     ) {
       setTransactions((prev) =>
@@ -103,7 +101,7 @@ const Transactions = () => {
           headers: {
             authorization: token,
           },
-        }
+        },
       );
       const data = await response.json();
       if (response.ok) {

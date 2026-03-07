@@ -7,11 +7,31 @@ export const UserContext = createContext();
 export const UserProvider = (props) => {
   const [user, setUser] = useState({});
 
+  const fetchUserDetail = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const response = await fetch("http://localhost:3000/api/v1/users", {
+        method: "GET",
+        headers: {
+          authorization: token,
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setUser(data.user);
+      }
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
         user,
         setUser,
+        fetchUserDetail,
       }}
     >
       {props.children}

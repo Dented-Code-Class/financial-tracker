@@ -1,9 +1,10 @@
 @apiUrl = http://localhost:3000/api/v1
-@userURL = {{apiUrl}}/auth
+@authUrl = {{apiUrl}}/auth
+@userUrl = {{apiUrl}}/users
 
 @transactionURl = {{apiUrl}}/transactions
 
-POST {{userURL}}/register
+POST {{authUrl}}/register
 Content-Type: application/json
 
 {
@@ -13,14 +14,18 @@ Content-Type: application/json
 }
 
 ### login request
-POST {{userURL}}/login
+POST {{authUrl}}/login
 Content-Type: application/json
 
 {
-    "email" : "b@gmail.com",
+    "email" : "test@gmail.com",
     "password" : "1234"
 }
 
+
+### get user detail
+GET {{userUrl}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzcyODQ0MTQwLCJleHAiOjE3NzI5MzA1NDB9.sAepS6uQrwhGd2fj1VvUOHoLU10g06ecGTP7WQTqXpY
 
 ###
 POST {{transactionURl}}

@@ -27,12 +27,12 @@ const Transactions = () => {
   // Add new transaction
   const handleAddTransaction = async (newTx) => {
     // TODO: call add transaction api
-    // POST http://localhost:3000/api/v1/transactions
+    // POSTimport.meta.env.VITE_ROOT_URL +  /api/v1/transactions
 
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3000/api/v1/transactions",
+        import.meta.env.VITE_ROOT_URL + "/api/v1/transactions",
         {
           method: "POST",
           headers: {
@@ -84,7 +84,7 @@ const Transactions = () => {
       //   CALL DELET API
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:3000/api/v1/transactions",
+        import.meta.env.VITE_ROOT_URL + "/api/v1/transactions",
         {
           method: "DELETE",
           headers: {
@@ -112,13 +112,13 @@ const Transactions = () => {
   };
 
   //   TODO: call api to fetch transactionfrom backend api
-  // http://localhost:3000/api/v1/transactions
+  //import.meta.env.VITE_ROOT_URL +  /api/v1/transactions
 
   const fetchtransactions = async () => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        "http://localhost:3000/api/v1/transactions",
+        import.meta.env.VITE_ROOT_URL + "/api/v1/transactions",
         {
           method: "GET",
           headers: {

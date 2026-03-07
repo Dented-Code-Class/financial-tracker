@@ -11,12 +11,15 @@ export const UserProvider = (props) => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      const response = await fetch("http://localhost:3000/api/v1/users", {
-        method: "GET",
-        headers: {
-          authorization: token,
+      const response = await fetch(
+        import.meta.env.VITE_ROOT_URL + "/api/v1/users",
+        {
+          method: "GET",
+          headers: {
+            authorization: token,
+          },
         },
-      });
+      );
 
       const data = await response.json();
 

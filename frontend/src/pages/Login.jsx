@@ -37,14 +37,17 @@ const Login = () => {
     console.log("Login Data:", formData);
     // API call to login api
     try {
-      const response = await fetch("http://localhost:3000/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      const response = await fetch(
+        import.meta.env.VITE_ROOT_URL + "/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        },
+      );
       const data = await response.json();
       if (response.ok) {
         alert("Login successful");

@@ -47,7 +47,6 @@ const Login = () => {
         // store token at the local storage
         const token = data.token;
         localStorage.setItem("token", token);
-
         navigate("/dashboard");
       } else {
         alert(data.message || "Login failed");

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -27,7 +27,7 @@ const Transactions = () => {
   const handleAddTransaction = (newTx) => {
     // Basic sort by date descending when adding
     const updated = [newTx, ...transactions].sort(
-      (a, b) => new Date(b.date) - new Date(a.date),
+      (a, b) => new Date(b.date) - new Date(a.date)
     );
     setTransactions(updated);
     // TODO: call add transaction api
@@ -56,18 +56,49 @@ const Transactions = () => {
     if (selectedIds.length === 0) return;
     if (
       window.confirm(
-        `Are you sure you want to delete ${selectedIds.length} transaction(s)?`,
+        `Are you sure you want to delete ${selectedIds.length} transaction(s)?`
       )
     ) {
       setTransactions((prev) =>
-        prev.filter((t) => !selectedIds.includes(t.id)),
+        prev.filter((t) => !selectedIds.includes(t.id))
       );
       setSelectedIds([]); // clear selection
     }
   };
 
-  //   TODO: call api to fetch transactionf from backend api
+  //   TODO: call api to fetch transactionfrom backend api
   // http://localhost:3000/api/v1/transactions
+
+  const fetchtransactions = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/v1/transactions",
+        {
+          method: "GET",
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        alert("fetch successfull");
+
+        setTransactions(data.transactions);
+        console.log(103, data);
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      fetchtransactions();
+    };
+  }, []);
 
   return (
     <Container className="py-5">
@@ -193,7 +224,7 @@ const Transactions = () => {
                               onChange={(e) => handleSelectOne(e, tx.id)}
                             />
                           </td>
-                          <td className="py-3">{tx.date}</td>
+                          <td className="py-3">{tx.tDate.split("T")[0]}</td>
                           <td className="py-3">{tx.description}</td>
                           <td className="py-3">
                             <Badge

@@ -45,10 +45,8 @@ const Transactions = () => {
       const data = await response.json();
       console.log("Add Transaction Response:", data);
       if (data.status == "success") {
-        const addedTransaction = data.transactions;
-        const updated = [addedTransaction, ...transactions].sort(
-          (a, b) => new Date(b.date) - new Date(a.date),
-        );
+        const addedTransaction = data.transaction;
+        const updated = [...transactions, addedTransaction];
 
         setTransactions(updated);
         handleCloseModal();
@@ -89,6 +87,38 @@ const Transactions = () => {
       setSelectedIds([]); // clear selection
     }
   };
+
+  //   TODO: call api to fetch transactionfrom backend api
+  // http://localhost:3000/api/v1/transactions
+
+  const fetchtransactions = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/v1/transactions",
+        {
+          method: "GET",
+          headers: {
+            authorization: token,
+          },
+        },
+      );
+      const data = await response.json();
+      if (response.ok) {
+        alert("fetch successfull");
+
+        setTransactions(data.transactions);
+        console.log(103, data);
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchtransactions();
+  }, []);
 
   return (
     <Container className="py-5">
@@ -214,7 +244,7 @@ const Transactions = () => {
                               onChange={(e) => handleSelectOne(e, tx._id)}
                             />
                           </td>
-                          <td className="py-3">{tx.date}</td>
+                          <td className="py-3">{tx.tDate.split("T")[0]}</td>
                           <td className="py-3">{tx.description}</td>
                           <td className="py-3">
                             <Badge

@@ -75,3 +75,11 @@ export const loginUser = async (req, res) => {
     });
   }
 };
+
+export const getUserDetail = async (req, res) => {
+  return res.send({
+    status: "success",
+    message: "User Detail Fetched",
+    user: req.user,
+  });
+};

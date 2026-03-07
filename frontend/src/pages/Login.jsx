@@ -11,8 +11,11 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import Custominputs from "../components/CustomInputs/Custominputs";
 import useForm from "../hooks/useForm";
+import { useUser } from "../context/UserContext";
 
 const Login = () => {
+  const { fetchUserDetail } = useUser();
+
   const navigate = useNavigate();
   const initialState = {
     email: "",
@@ -30,7 +33,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
-    // TODO: Add API call
+    // API call to login api
     try {
       const response = await fetch("http://localhost:3000/api/v1/auth/login", {
         method: "POST",
@@ -48,7 +51,10 @@ const Login = () => {
         const token = data.token;
         localStorage.setItem("token", token);
 
-        navigate("/dashboard");
+        // fetch user detail
+        fetchUserDetail();
+
+        // navigate("/dashboard");
       } else {
         alert(data.message || "Login failed");
       }

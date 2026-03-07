@@ -2,7 +2,11 @@ import express from "express";
 import mongoose, { mongo } from "mongoose";
 import { configDotenv } from "dotenv";
 import cors from "cors";
-import { createUser, loginUser } from "./src/controllers/userControllers.js";
+import {
+  createUser,
+  getUserDetail,
+  loginUser,
+} from "./src/controllers/userControllers.js";
 import {
   createTransaction,
   deleteTransaction,
@@ -26,6 +30,9 @@ app.post("/api/v1/auth/register", createUser);
 
 // login api
 app.post("/api/v1/auth/login", loginUser);
+
+// get user detail
+app.get("/api/v1/users", auth, getUserDetail);
 
 //Create Transaction
 app.post("/api/v1/transactions", auth, createTransaction);

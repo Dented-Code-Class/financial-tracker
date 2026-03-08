@@ -16,12 +16,15 @@ const Dashboard = () => {
   const fetchSummary = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:3000/api/v1/dashboard", {
-        method: "GET",
-        headers: {
-          authorization: token,
+      const response = await fetch(
+        import.meta.env.VITE_ROOT_URL + "/api/v1/dashboard",
+        {
+          method: "GET",
+          headers: {
+            authorization: token,
+          },
         },
-      });
+      );
       const data = await response.json();
       if (response.ok) {
         console.log("103", data);

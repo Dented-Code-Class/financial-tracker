@@ -10,6 +10,7 @@ const Dashboard = () => {
     totalIncome: 0,
     totalExpense: 0,
     totalBalance: 0,
+    lineData: [],
   });
 
   const fetchSummary = async () => {
@@ -142,7 +143,7 @@ const Dashboard = () => {
       <Row>
         {/* Main Charts Area */}
         <Col lg={8} className="mb-4 mb-lg-0">
-          <ChartsOverview />
+          <ChartsOverview lineData={summary.lineData} />
         </Col>
 
         {/* Quick Add Sidebar */}

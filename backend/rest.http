@@ -2,6 +2,8 @@
 @authUrl = {{apiUrl}}/auth
 @userUrl = {{apiUrl}}/users
 
+@dashboardUrl = {{apiUrl}}/dashboard
+
 @transactionURl = {{apiUrl}}/transactions
 
 POST {{authUrl}}/register
@@ -9,7 +11,7 @@ Content-Type: application/json
 
 {
     "username":"manish",
-    "email": "test123@gmail.com",
+    "email": "b23@gmail.com",
     "password": "123456"
 }
 
@@ -19,7 +21,7 @@ Content-Type: application/json
 
 {
     "email" : "b@gmail.com",
-    "password" : "1234"
+    "password" : "123456"
 }
 
 
@@ -29,12 +31,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwu
 
 ###
 POST {{transactionURl}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAZ21haWwuY29tIiwiaWF0IjoxNzcyODUwMjA3LCJleHAiOjE3NzI5MzY2MDd9.Sjfwbe_1i8YxRWW0c9CGUSK-eSKKPSrx1suuZ1tdqu8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAZ21haWwuY29tIiwiaWF0IjoxNzcyOTI2OTA3LCJleHAiOjE3NzMwMTMzMDd9.k6E3F_RwVfXs8d9Ax5Z12jEw_BiwH9ghRvDZP3vjnfc
 Content-Type: application/json
 
 {
-    "type":"income",
-    "amount": "400",
+    "type":"expense",
+    "amount": "100",
     "tDate":"2025-02-25",
     "description": "salary"
 }
@@ -45,7 +47,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21h
 
 ###
 PATCH {{transactionURl}}/69a38331763a7f3ae7a7127c
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwiaWF0IjoxNzcyMzI2MDQyLCJleHAiOjE3NzI0MTI0NDJ9.0ZcxrYG4rBMZ3Ua0ZNicrNzSps6KMKh6urjgBiZnK9s
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAZ21haWwuY29tIiwiaWF0IjoxNzcyOTI2OTA3LCJleHAiOjE3NzMwMTMzMDd9.k6E3F_RwVfXs8d9Ax5Z12jEw_BiwH9ghRvDZP3vjnfc
 Content-Type: application/json
 
 {
@@ -65,3 +67,8 @@ Content-Type: application/json
 {
     "ids": ["69a39134068667756326dc1e","69a3818492a4d161ac55ea21","69a3818492a4d161ac55ea1f"]
 }
+
+###
+GET {{dashboardUrl}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAZ21haWwuY29tIiwiaWF0IjoxNzcyOTI2OTA3LCJleHAiOjE3NzMwMTMzMDd9.k6E3F_RwVfXs8d9Ax5Z12jEw_BiwH9ghRvDZP3vjnfc
+

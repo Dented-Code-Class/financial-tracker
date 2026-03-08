@@ -11,6 +11,7 @@ import {
   createTransaction,
   deleteTransaction,
   deleteTransactions,
+  getDashboardSummary,
   getTransaction,
   updateTransaction,
 } from "./src/controllers/transactionControllers.js";
@@ -48,6 +49,9 @@ app.delete("/api/v1/transactions/:id", auth, deleteTransaction);
 
 //Delete Transaction by IDs
 app.delete("/api/v1/transactions", auth, deleteTransactions);
+
+//Dashboard summary
+app.get("/api/v1/dashboard", auth, getDashboardSummary);
 
 mongoose
   .connect(MONGO_URL) // MONGOURL --> Connection string

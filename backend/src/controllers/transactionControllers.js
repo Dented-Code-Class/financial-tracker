@@ -108,3 +108,43 @@ export const deleteTransactions = async (req, res) => {
     });
   }
 };
+
+export const getDashboardSummary = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const transactions = await Transaction.find({ userId });
+
+    const totalIncome = transactions
+      .filter((tx) => {
+        return tx.type == "income";
+      })
+      .reduce((acc, curr) => {
+        return curr.amount + acc;
+      }, 0);
+
+    const totalExpense = transactions
+      .filter((tx) => {
+        return tx.type == "expense";
+      })
+      .reduce((acc, curr) => {
+        return curr.amount + acc;
+      }, 0);
+
+    const totalBalance = totalIncome - totalExpense;
+    return res.send({
+      status: "success",
+      message: "dashboard information fetched",
+      summary: {
+        totalIncome,
+        totalExpense,
+        totalBalance,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.send({
+      status: "error",
+      message: "error getting data",
+    });
+  }
+};

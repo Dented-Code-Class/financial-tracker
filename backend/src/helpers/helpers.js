@@ -72,3 +72,38 @@ export const generateLineData = (transactions) => {
 
   return outputData;
 };
+
+// [
+//   { name: "Housing", value: 1200 },
+//   { name: "Food", value: 450 },
+//   { name: "Transport", value: 200 },
+//   { name: "Entertainment", value: 150 },
+//   { name: "Utilities", value: 300 },
+// ];
+
+export const generatePieData = (transactions) => {
+  let expenseTransaction = transactions.filter((tx) => {
+    return tx.type === "expense";
+  });
+
+  let pieData = [];
+
+  for (let tx of expenseTransaction) {
+    const name = tx.description;
+    const amount = tx.amount;
+
+    let oldData = pieData.find((item) => item.name === name);
+
+    if (oldData) {
+      oldData.value += amount;
+    } else {
+      let pieObj = {
+        name: name,
+        value: tx.amount,
+      };
+
+      pieData.push(pieObj);
+    }
+  }
+  return pieData;
+};

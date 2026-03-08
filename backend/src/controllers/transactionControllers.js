@@ -1,4 +1,4 @@
-import { generateLineData } from "../helpers/helpers.js";
+import { generateLineData, generatePieData } from "../helpers/helpers.js";
 import { Transaction } from "../models/transactionModel.js";
 
 export const createTransaction = async (req, res) => {
@@ -135,6 +135,7 @@ export const getDashboardSummary = async (req, res) => {
 
     // generate lineData
     const lineData = generateLineData(transactions);
+    const pieData = generatePieData(transactions);
 
     return res.send({
       status: "success",
@@ -144,6 +145,7 @@ export const getDashboardSummary = async (req, res) => {
         totalExpense,
         totalBalance,
         lineData,
+        pieData,
       },
     });
   } catch (error) {

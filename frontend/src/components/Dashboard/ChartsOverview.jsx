@@ -14,17 +14,9 @@ import {
   CartesianGrid,
 } from "recharts";
 
-const pieData = [
-  { name: "Housing", value: 1200 },
-  { name: "Food", value: 450 },
-  { name: "Transport", value: 200 },
-  { name: "Entertainment", value: 150 },
-  { name: "Utilities", value: 300 },
-];
-
 const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "#0088FE", "#FF6666"];
 
-const ChartsOverview = ({ lineData }) => {
+const ChartsOverview = ({ lineData, pieData }) => {
   return (
     <Card
       className="shadow-sm border-0 h-100"

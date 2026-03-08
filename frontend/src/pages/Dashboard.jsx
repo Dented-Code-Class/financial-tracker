@@ -3,25 +3,60 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import QuickAddTransaction from "../components/Dashboard/QuickAddTransaction";
 import ChartsOverview from "../components/Dashboard/ChartsOverview";
 import { useState } from "react";
-
+const initialTransactions = [];
 const Dashboard = () => {
+  const [transactions, setTransactions] = useState(initialTransactions);
   // Static data for now
   const [summary, setSummary] = useState({
     totalIncome: 0,
     totalExpense: 0,
     totalBalance: 0,
     lineData: [],
+    pieData: [],
   });
+  // Add new transaction
+  const handleAddTransaction = async (newTx) => {
+    // TODO: call add transaction api
+    // POSTimport.meta.env.VITE_ROOT_URL +  /api/v1/transactions
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        import.meta.env.VITE_ROOT_URL + "/api/v1/transactions",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            authorization: token,
+          },
+          body: JSON.stringify(newTx),
+        },
+      );
+      const data = await response.json();
+      console.log("Add Transaction Response:", data);
+      if (data.status == "success") {
+        const addedTransaction = data.transaction;
+        const updated = [...transactions, addedTransaction];
+
+        setTransactions(updated);
+        fetchSummary();
+      }
+    } catch (error) {
+      console.log("Error adding transaction:", error);
+    }
+  };
 
   const fetchSummary = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:3000/api/v1/dashboard", {
-        method: "GET",
-        headers: {
-          authorization: token,
+      const response = await fetch(
+        import.meta.env.VITE_ROOT_URL + "/api/v1/dashboard",
+        {
+          method: "GET",
+          headers: {
+            authorization: token,
+          },
         },
-      });
+      );
       const data = await response.json();
       if (response.ok) {
         console.log("103", data);
@@ -143,12 +178,15 @@ const Dashboard = () => {
       <Row>
         {/* Main Charts Area */}
         <Col lg={8} className="mb-4 mb-lg-0">
-          <ChartsOverview lineData={summary.lineData} />
+          <ChartsOverview
+            lineData={summary.lineData}
+            pieData={summary.pieData}
+          />
         </Col>
 
         {/* Quick Add Sidebar */}
         <Col lg={4}>
-          <QuickAddTransaction />
+          <QuickAddTransaction handleAddTransaction={handleAddTransaction} />
         </Col>
       </Row>
     </Container>

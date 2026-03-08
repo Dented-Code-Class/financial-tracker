@@ -26,6 +26,13 @@ const MONGO_URL =
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  return res.send({
+    status: "success",
+    message: "Financial Tracker API",
+  });
+});
+
 //User Register
 app.post("/api/v1/auth/register", createUser);
 

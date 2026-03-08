@@ -20,7 +20,7 @@ POST {{authUrl}}/login
 Content-Type: application/json
 
 {
-    "email" : "b@gmail.com",
+    "email" : "b23@gmail.com",
     "password" : "123456"
 }
 
@@ -31,13 +31,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwu
 
 ###
 POST {{transactionURl}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAZ21haWwuY29tIiwiaWF0IjoxNzcyOTI2OTA3LCJleHAiOjE3NzMwMTMzMDd9.k6E3F_RwVfXs8d9Ax5Z12jEw_BiwH9ghRvDZP3vjnfc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImIyM0BnbWFpbC5jb20iLCJpYXQiOjE3NzI5MjkxMTMsImV4cCI6MTc3MzAxNTUxM30.Tu27VQ_hKZ1Ld6XOh5RQJJf5jJhP0BWg0bKLFMFSAyo
 Content-Type: application/json
 
 {
     "type":"expense",
-    "amount": "100",
-    "tDate":"2025-02-25",
+    "amount": "5000",
+    "tDate":"2025-04-25",
     "description": "salary"
 }
 
@@ -70,5 +70,5 @@ Content-Type: application/json
 
 ###
 GET {{dashboardUrl}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJAZ21haWwuY29tIiwiaWF0IjoxNzcyOTI2OTA3LCJleHAiOjE3NzMwMTMzMDd9.k6E3F_RwVfXs8d9Ax5Z12jEw_BiwH9ghRvDZP3vjnfc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImIyM0BnbWFpbC5jb20iLCJpYXQiOjE3NzI5MjkxMTMsImV4cCI6MTc3MzAxNTUxM30.Tu27VQ_hKZ1Ld6XOh5RQJJf5jJhP0BWg0bKLFMFSAyo
 

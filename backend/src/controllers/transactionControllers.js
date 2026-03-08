@@ -1,3 +1,4 @@
+import { generateLineData } from "../helpers/helpers.js";
 import { Transaction } from "../models/transactionModel.js";
 
 export const createTransaction = async (req, res) => {
@@ -131,6 +132,10 @@ export const getDashboardSummary = async (req, res) => {
       }, 0);
 
     const totalBalance = totalIncome - totalExpense;
+
+    // generate lineData
+    const lineData = generateLineData(transactions);
+
     return res.send({
       status: "success",
       message: "dashboard information fetched",
@@ -138,6 +143,7 @@ export const getDashboardSummary = async (req, res) => {
         totalIncome,
         totalExpense,
         totalBalance,
+        lineData,
       },
     });
   } catch (error) {
